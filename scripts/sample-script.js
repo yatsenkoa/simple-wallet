@@ -15,13 +15,13 @@ async function main() {
 
   // We get the contract to deploy
 
-  console.log('my balls')
-  const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
 
-  await greeter.deployed();
+  const Wallet = await hre.ethers.getContractFactory("Wallet");
+  const wallet = await Wallet.deploy();
 
-  console.log("Greeter deployed to:", greeter.address);
+  await wallet.deployed();
+
+  console.log("Wallet deployed to:", wallet.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

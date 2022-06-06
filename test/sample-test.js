@@ -1,26 +1,31 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
-
-
-    expect(await greeter.greet()).to.equal("Hello, world!");
-
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
-
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
-  });
-});
-
 describe("Wallet", () => {
     it("Should accept coins for a small fee, and allow you to get them back", async () => {
+
+        const [owner] = await ethers.getSigners();
+        const addr = owner.address;
+
         const Wallet = await ethers.getContractFactory("Wallet")
-    })
-_)
+        const wallet = await Wallet.deploy({gasPrice: 50000000000});
+
+        await wallet.deployed();
+
+        var dep = await wallet.deposit({value: ethers.utils.parseEther("0.1")});
+        dep = await wallet.deposit({value: ethers.utils.parseEther("0.1")});
+        dep = await wallet.deposit({value: ethers.utils.parseEther("0.1")});
+
+        expect(dep == 0);
+
+        const db = await wallet.getBalance();
+
+        console.log(db);
+
+        const wd = await wallet.callStatic.withdraw(ethers.utils.parseEther("0.01"));
+
+        expect (wd == 0);
+
+
+    })}
+)
