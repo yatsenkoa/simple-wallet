@@ -19,13 +19,13 @@ describe("Wallet", () => {
         expect(dep == 0);
 
         const db = await wallet.getBalance();
-
         console.log(db);
 
-        const wd = await wallet.callStatic.withdraw(ethers.utils.parseEther("0.01"));
-
+        const wd = await wallet.withdraw(ethers.utils.parseEther("0.3"));
         expect (wd == 0);
 
 
+        const db2 = await wallet.getBalance();
+        console.log(db2);
     })}
 )
